@@ -41,11 +41,8 @@ class App extends Component {
           )}
         </div>
         {gists && (
-          // <Route path="/g/:gistId" component={Gist}/>
           <Route path="/g/:gistId" render={({ match }) => (
-              console.log('working here', gists),
-            // <h2>wheee</h2>
-              <Gist gistId={match.params.gistId} gists={gists} />
+            <Gist gist={gists.find(g => g.id === parseInt(match.params.gistId))} />
             )}/>
         )}
         
@@ -54,16 +51,11 @@ class App extends Component {
   }
 }
 
-const Gist = ({ gistId, gists }) => {
-  let myGist = gists.find(g => g.id === parseInt(gistId))
-  console.log('MYGIST', myGist);
-  console.log(gistId, gists)
-  return(null)
+const Gist = ({ gist }) => {
   return(
     <div>
-      {myGist.description}
+      {gist.description}
     </div>
   )
 }
-
 export default App;
